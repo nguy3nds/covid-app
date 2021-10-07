@@ -37,9 +37,7 @@ function App() {
 
   return (
     <Container>
-      <Typography component="h1" variant="h2" style={{ marginTop: 10 }}>
-        Thống kê covid
-      </Typography>
+      <Typography>Thống kê covid</Typography>
       <CountrySelector
         countries={countries}
         handleOnChange={handleOnChange}

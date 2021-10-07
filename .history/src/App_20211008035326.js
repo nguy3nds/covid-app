@@ -4,18 +4,16 @@ import CountrySelector from "./components/CountrySelector";
 import Highlight from "./components/Highlight";
 import Summary from "./components/Summary";
 import { getReportByCountry } from "./apis";
-import { Container, Typography } from "@material-ui/core";
 
 function App() {
   const [countries, setCountries] = useState([]);
-  const [selectedCountryId, setSelectedCountryId] = useState("");
+  const [selectedCountryId, setSelectedCountryId] = useState("vn");
   const [report, setReport] = useState([]);
 
   useEffect(() => {
     getCountries().then((res) => {
       setCountries(res.data);
     });
-    setSelectedCountryId("vn");
   }, []);
 
   useEffect(() => {
@@ -36,18 +34,11 @@ function App() {
   };
 
   return (
-    <Container>
-      <Typography component="h1" variant="h2" style={{ marginTop: 10 }}>
-        Thống kê covid
-      </Typography>
-      <CountrySelector
-        countries={countries}
-        handleOnChange={handleOnChange}
-        value={selectedCountryId}
-      />
+    <div>
+      <CountrySelector countries={countries} handleOnChange={handleOnChange} />
       <Highlight report={report} />
-      <Summary countryId={selectedCountryId} report={report} />
-    </Container>
+      <Summary report={report} />
+    </div>
   );
 }
 

@@ -4,31 +4,24 @@ import CountrySelector from "./components/CountrySelector";
 import Highlight from "./components/Highlight";
 import Summary from "./components/Summary";
 import { getReportByCountry } from "./apis";
-import { Container, Typography } from "@material-ui/core";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountryId, setSelectedCountryId] = useState("");
-  const [report, setReport] = useState([]);
 
   useEffect(() => {
     getCountries().then((res) => {
       setCountries(res.data);
     });
-    setSelectedCountryId("vn");
   }, []);
 
   useEffect(() => {
-    const country = countries.find(
+    const { Slug } = countries.find(
       (country) => country.ISO2.toLowerCase() === selectedCountryId
     );
-    if (country) {
-      getReportByCountry(country.Slug).then((res) => {
-        // xoa di gia tri cuoi cung
-        res.data.pop();
-        setReport(res.data);
-      });
-    }
+    getReportByCountry(Slug).then((res) =>
+      console.log("getReportByCountry", res)
+    );
   }, [selectedCountryId, countries]);
 
   const handleOnChange = (e) => {
@@ -36,18 +29,11 @@ function App() {
   };
 
   return (
-    <Container>
-      <Typography component="h1" variant="h2" style={{ marginTop: 10 }}>
-        Thống kê covid
-      </Typography>
-      <CountrySelector
-        countries={countries}
-        handleOnChange={handleOnChange}
-        value={selectedCountryId}
-      />
-      <Highlight report={report} />
-      <Summary countryId={selectedCountryId} report={report} />
-    </Container>
+    <div>
+      <CountrySelector countries={countries} handleOnChange={handleOnChange} />
+      <Highlight />
+      <Summary />
+    </div>
   );
 }
 

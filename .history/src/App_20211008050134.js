@@ -4,7 +4,6 @@ import CountrySelector from "./components/CountrySelector";
 import Highlight from "./components/Highlight";
 import Summary from "./components/Summary";
 import { getReportByCountry } from "./apis";
-import { Container, Typography } from "@material-ui/core";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -36,10 +35,7 @@ function App() {
   };
 
   return (
-    <Container>
-      <Typography component="h1" variant="h2" style={{ marginTop: 10 }}>
-        Thống kê covid
-      </Typography>
+    <div>
       <CountrySelector
         countries={countries}
         handleOnChange={handleOnChange}
@@ -47,7 +43,7 @@ function App() {
       />
       <Highlight report={report} />
       <Summary countryId={selectedCountryId} report={report} />
-    </Container>
+    </div>
   );
 }
 

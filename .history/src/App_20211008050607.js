@@ -37,7 +37,7 @@ function App() {
 
   return (
     <Container>
-      <Typography component="h1" variant="h2" style={{ marginTop: 10 }}>
+      <Typography component="h1" variant="h2" className={{"margin-top": 10px}}>
         Thống kê covid
       </Typography>
       <CountrySelector
